@@ -1,5 +1,5 @@
-# Welcome to your Lovable project(frontend done)
 
+# Lovable project - Frontend by Student 1 & Backend by Student 2
 ## Project info
 
 **URL**: https://lovable.dev/projects/02dad610-d723-4991-b906-f05de1af5449
