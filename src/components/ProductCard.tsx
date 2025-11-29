@@ -2,16 +2,23 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ShoppingCart, Heart } from "lucide-react";
 import { toast } from "sonner";
+import { useCart } from "@/contexts/CartContext";
 
 interface ProductCardProps {
+  id: string;
   name: string;
-  price: string;
+  price: number;
   description: string;
   image: string;
-  onBuy: () => void;
 }
 
-export const ProductCard = ({ name, price, description, image, onBuy }: ProductCardProps) => {
+export const ProductCard = ({ id, name, price, description, image }: ProductCardProps) => {
+  const { addItem } = useCart();
+
+  const handleBuy = () => {
+    addItem({ id, name, price, image });
+  };
+
   const handleWishlist = () => {
     toast.success(`${name} added to wishlist!`);
   };
@@ -29,14 +36,16 @@ export const ProductCard = ({ name, price, description, image, onBuy }: ProductC
         <div>
           <h3 className="text-2xl font-bold text-foreground mb-2">{name}</h3>
           <p className="text-muted-foreground mb-3">{description}</p>
-          <p className="text-3xl font-bold gradient-primary bg-clip-text text-transparent">{price}</p>
+          <p className="text-3xl font-bold gradient-primary bg-clip-text text-transparent">
+            ${price.toFixed(2)}
+          </p>
         </div>
         <div className="flex gap-3">
           <Button 
             variant="buy" 
             size="lg" 
             className="flex-1"
-            onClick={onBuy}
+            onClick={handleBuy}
           >
             <ShoppingCart className="w-4 h-4" />
             Buy Now
